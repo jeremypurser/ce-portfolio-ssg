@@ -1,38 +1,37 @@
 import Head from 'next/head';
-import Date from '../../components/date';
 import Layout from '../../components/layout';
-import { getAllPostIds, getPostData } from '../../lib/posts';
+import { getAllPageIds, getPagesData } from '../../lib/posts';
 import utilStyles from '../../styles/utils.module.css';
 
-export default function Post({ postData }) {
+export default function Post({ pageData }) {
   return (
     <Layout>
       <Head>
-        <title>{postData.title}</title>
+        <title>{pageData.name}</title>
       </Head>
       <article>
-        <h1 className={utilStyles.headingXl}>{postData.title}</h1>
-        <div className={utilStyles.lightText}>
-          <Date dateString={postData.date} />
-        </div>
-        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+        <h1 className={utilStyles.headingXl}>{pageData.name}</h1>
+        {/* <div className={utilStyles.lightText}> */}
+        {/* <Date dateString={pageData.date} /> */}
+        {/* </div> */}
+        <div dangerouslySetInnerHTML={{ __html: pageData.description }} />
       </article>
     </Layout>
   );
 }
 
 export async function getStaticPaths() {
+  const paths = await getAllPageIds();
+
   return {
-    paths: getAllPostIds(),
+    paths,
     fallback: false,
   };
 }
 
 export async function getStaticProps({ params }) {
-  const postData = await getPostData(params.id);
+  const pageData = await getPagesData(params.id);
   return {
-    props: {
-      postData,
-    },
+    props: { pageData },
   };
 }
