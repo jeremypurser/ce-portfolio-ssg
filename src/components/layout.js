@@ -3,10 +3,10 @@ import Link from 'next/link';
 import utilStyles from '../styles/utils.module.css';
 import styles from './layout.module.css';
 
-const name = 'Jeremy Purser';
-export const siteTitle = 'Next.js Sample Website';
+const name = 'Catherine Edgerton';
+export const siteTitle = name;
 
-export default function Layout({ children, home }) {
+export default function Layout({ children, home, allPagesData }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -53,6 +53,16 @@ export default function Layout({ children, home }) {
           </>
         )}
       </header>
+      <nav>
+        {allPagesData.map(({ id, name }) => (
+          <li className={utilStyles.listItem} key={id}>
+            <Link href="/posts/[id]" as={`/posts/${id}`}>
+              <a>{name}</a>
+            </Link>
+            <br />
+          </li>
+        ))}
+      </nav>
       <main>{children}</main>
       {!home && (
         <div className={styles.backToHome}>
