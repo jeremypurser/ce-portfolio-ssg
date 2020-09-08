@@ -1,19 +1,20 @@
 import Head from 'next/head';
 import Layout from '../../components/layout';
-import { getAllPageIds, getPagesData } from '../../lib/posts';
+import {
+  getAllPageIds,
+  getPagesData,
+  getSortedPagesData,
+} from '../../lib/posts';
 import utilStyles from '../../styles/utils.module.css';
 
-export default function Post({ pageData }) {
+export default function Post({ pageData, allPagesData }) {
   return (
-    <Layout>
+    <Layout allPagesData={allPagesData}>
       <Head>
         <title>{pageData.name}</title>
       </Head>
       <article>
         <h1 className={utilStyles.headingXl}>{pageData.name}</h1>
-        {/* <div className={utilStyles.lightText}> */}
-        {/* <Date dateString={pageData.date} /> */}
-        {/* </div> */}
         <div dangerouslySetInnerHTML={{ __html: pageData.description }} />
       </article>
     </Layout>
@@ -31,7 +32,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const pageData = await getPagesData(params.id);
+  const allPagesData = await getSortedPagesData();
   return {
-    props: { pageData },
+    props: {
+      pageData,
+      allPagesData,
+    },
   };
 }
