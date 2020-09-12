@@ -56,7 +56,7 @@ export default function Layout({ children, home, allPagesData }) {
       <nav>
         {allPagesData.map(({ id, name }) => (
           <li className={utilStyles.listItem} key={id}>
-            <Link href="/posts/[id]" as={`/posts/${id}`}>
+            <Link href="/about/[id]" as={`/about/${id}`}>
               <a>{name}</a>
             </Link>
             <br />
