@@ -25,7 +25,11 @@ export default function Layout({ children, home, allPagesData }) {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <header>
-        <h2>{siteTitle}</h2>
+        <h2>
+          <Link href="/">
+            <a>{siteTitle}</a>
+          </Link>
+        </h2>
       </header>
       <nav>
         {allPagesData.map(({ slug, name }) => (
