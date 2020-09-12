@@ -24,23 +24,23 @@ export default function Layout({ children, home, allPagesData }) {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <header>
+      <header className={styles.header}>
         <h2>
           <Link href="/">
             <a>{siteTitle}</a>
           </Link>
         </h2>
+        <nav className={styles.nav}>
+          {allPagesData.map(({ slug, name }) => (
+            <li className={utilStyles.listItem} key={slug}>
+              <Link href="/about/[slug]" as={`/about/${slug}`}>
+                <a>{name}</a>
+              </Link>
+              <br />
+            </li>
+          ))}
+        </nav>
       </header>
-      <nav>
-        {allPagesData.map(({ slug, name }) => (
-          <li className={utilStyles.listItem} key={slug}>
-            <Link href="/about/[slug]" as={`/about/${slug}`}>
-              <a>{name}</a>
-            </Link>
-            <br />
-          </li>
-        ))}
-      </nav>
       <main>{children}</main>
       {!home && (
         <div className={styles.backToHome}>
