@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import Layout from '../../components/layout';
 import {
-  getAllPageIds,
   getPagesData,
+  getPageSlugs,
   getSortedPagesData,
 } from '../../lib/about';
 import utilStyles from '../../styles/utils.module.css';
@@ -22,7 +22,7 @@ export default function Page({ pageData, allPagesData }) {
 }
 
 export async function getStaticPaths() {
-  const paths = await getAllPageIds();
+  const paths = await getPageSlugs();
 
   return {
     paths,
@@ -31,7 +31,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const pageData = await getPagesData(params.id);
+  const pageData = await getPagesData(params.slug);
   const allPagesData = await getSortedPagesData();
   return {
     props: {
