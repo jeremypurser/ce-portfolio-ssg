@@ -24,6 +24,9 @@ export default function Layout({ children, home, allPagesData }) {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
+      <header>
+        <h2>{siteTitle}</h2>
+      </header>
       <nav>
         {allPagesData.map(({ slug, name }) => (
           <li className={utilStyles.listItem} key={slug}>
