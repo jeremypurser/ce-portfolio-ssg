@@ -24,39 +24,10 @@ export default function Layout({ children, home, allPagesData }) {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <header className={styles.header}>
-        {home ? (
-          <>
-            <img
-              src="/images/profile.jpg"
-              className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
-              alt={name}
-            />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
-          </>
-        ) : (
-          <>
-            <Link href="/">
-              <a>
-                <img
-                  src="/images/profile.jpg"
-                  className={`${styles.headerImage} ${utilStyles.borderCircle}`}
-                  alt={name}
-                />
-              </a>
-            </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href="/">
-                <a className={utilStyles.colorInherit}>{name}</a>
-              </Link>
-            </h2>
-          </>
-        )}
-      </header>
       <nav>
-        {allPagesData.map(({ id, name }) => (
-          <li className={utilStyles.listItem} key={id}>
-            <Link href="/about/[id]" as={`/about/${id}`}>
+        {allPagesData.map(({ slug, name }) => (
+          <li className={utilStyles.listItem} key={slug}>
+            <Link href="/about/[slug]" as={`/about/${slug}`}>
               <a>{name}</a>
             </Link>
             <br />
