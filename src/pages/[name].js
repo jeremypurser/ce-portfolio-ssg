@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import Layout from '../components/layout';
 import { getSortedPagesData } from '../lib/about';
 import {
@@ -18,7 +19,9 @@ export default function Category({
       <article>
         <h1>{categoryData.name}</h1>
         {categoryData.pieces.map(({ id, title }) => (
-          <p key={id}>{title}</p>
+          <Link key={id} href="/art/[id]" as={`/art/${id}`}>
+            <a>{title}</a>
+          </Link>
         ))}
       </article>
     </Layout>
