@@ -58,10 +58,19 @@
 .categoryList a:hover,
 .categoryList a:link,
 .categoryList a:visited {
-  background-color: rgba(0, 128, 128, 0.75);
+  /* background-color: rgba(0, 128, 128, 0.75); */
   background-image: none;
   text-align: center;
   line-height: 200px;
+}
+
+.categoryList li {
+  width: 100%;
+  height: 100%;
+}
+
+.categoryList li:hover {
+  background-color: rgba(0, 128, 128, 0.75);
 }
 
 .categoryList a:hover {
