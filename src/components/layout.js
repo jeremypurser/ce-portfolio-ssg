@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import styles from '../styles/layout.module.css';
 import utilStyles from '../styles/utils.module.css';
 
@@ -12,6 +13,21 @@ export default function Layout({
   allPagesData,
   allCategoriesData,
 }) {
+  const [currentCategory, setCurrentCategory] = useState();
+
+  useEffect(() => {
+    const path = window.location.pathname.replace('/', '');
+    if (
+      (path === 'books' ||
+        path === 'glass' ||
+        path === 'oils' ||
+        path === 'multi-media') &&
+      !currentCategory
+    ) {
+      setCurrentCategory(window.location.pathname.replace('/', ''));
+    }
+  });
+
   return (
     <div className={styles.container}>
       <Head>
@@ -50,7 +66,7 @@ export default function Layout({
       </header>
       <nav className={styles.categoryNav}>
         <ul className={styles.categoryList}>
-          {allCategoriesData.map(({ id, name, thumbnail }, i) => (
+          {allCategoriesData.map(({ id, name, thumbnail }) => (
             <Link href="/[name]" as={`/${name}`} key={id}>
               <a
                 style={{
@@ -58,7 +74,14 @@ export default function Layout({
                   backgroundSize: 'cover',
                 }}
               >
-                <li>{name}</li>
+                <li
+                  className={`${
+                    currentCategory === name ? `${styles.active}` : null
+                  }`}
+                  onClick={() => setCurrentCategory(name)}
+                >
+                  {name}
+                </li>
               </a>
             </Link>
           ))}
