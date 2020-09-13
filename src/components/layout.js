@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useState } from 'react';
 import styles from '../styles/layout.module.css';
 import utilStyles from '../styles/utils.module.css';
 
@@ -12,6 +13,10 @@ export default function Layout({
   allPagesData,
   allCategoriesData,
 }) {
+  const [showBgImage, setShowBgImage] = useState(
+    allCategoriesData.map(() => true)
+  );
+
   return (
     <div className={styles.container}>
       <Head>
@@ -50,22 +55,33 @@ export default function Layout({
       </header>
       <nav className={styles.categoryNav}>
         <ul className={styles.categoryList}>
-          {allCategoriesData.map(({ id, name, thumbnail }) => (
-            <li
-              className={utilStyles.listItem}
-              key={id}
-              style={{
-                backgroundImage: `url(${thumbnail.url})`,
-                backgroundSize: 'cover',
-              }}
-            >
-              <Link href="/[name]" as={`/${name}`}>
-                <a>
-                  {name}
-                  {/* <img src={thumbnail.url} /> */}
-                </a>
-              </Link>
-            </li>
+          {allCategoriesData.map(({ id, name, thumbnail }, i) => (
+            <Link href="/[name]" as={`/${name}`} key={id}>
+              <a
+                style={{
+                  backgroundImage: `${
+                    showBgImage[i] ? `url(${thumbnail.url})` : 'none'
+                  }`,
+                  backgroundSize: 'cover',
+                }}
+                onMouseEnter={() =>
+                  setShowBgImage((show) => {
+                    const newShow = [...show];
+                    newShow[i] = false;
+                    return newShow;
+                  })
+                }
+                onMouseLeave={() =>
+                  setShowBgImage((show) => {
+                    const newShow = [...show];
+                    newShow[i] = true;
+                    return newShow;
+                  })
+                }
+              >
+                {name}
+              </a>
+            </Link>
           ))}
         </ul>
       </nav>
