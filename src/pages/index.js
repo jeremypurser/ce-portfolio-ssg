@@ -1,21 +1,18 @@
 import Head from 'next/head';
 import Layout, { siteTitle } from '../components/layout';
 import { getSortedPagesData } from '../lib/about';
-import utilStyles from '../styles/utils.module.css';
+import { getSortedCategoriesData } from '../lib/category';
 
-export default function Home({ allPagesData }) {
+export default function Home({ allPagesData, allCategoriesData }) {
   return (
-    <Layout home={true} allPagesData={allPagesData}>
+    <Layout
+      home={true}
+      allPagesData={allPagesData}
+      allCategoriesData={allCategoriesData}
+    >
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section className={utilStyles.headingMd}>…</section>
-      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
-        <ul className={utilStyles.list}>
-          <li>Placeholder</li>
-        </ul>
-      </section>
     </Layout>
   );
 }
@@ -23,9 +20,14 @@ export default function Home({ allPagesData }) {
 export async function getStaticProps() {
   const allPagesData = await getSortedPagesData();
 
+  const allCategoriesData = await getSortedCategoriesData();
+
+  console.log({ allCategoriesData });
+
   return {
     props: {
       allPagesData,
+      allCategoriesData,
     },
   };
 }

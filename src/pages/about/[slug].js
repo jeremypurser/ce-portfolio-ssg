@@ -5,11 +5,12 @@ import {
   getPageSlugs,
   getSortedPagesData,
 } from '../../lib/about';
+import { getSortedCategoriesData } from '../../lib/category';
 import utilStyles from '../../styles/utils.module.css';
 
-export default function Page({ pageData, allPagesData }) {
+export default function Page({ pageData, allPagesData, allCategoriesData }) {
   return (
-    <Layout allPagesData={allPagesData}>
+    <Layout allPagesData={allPagesData} allCategoriesData={allCategoriesData}>
       <Head>
         <title>{pageData.name}</title>
       </Head>
@@ -33,10 +34,13 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const pageData = await getPagesData(params.slug);
   const allPagesData = await getSortedPagesData();
+  const allCategoriesData = await getSortedCategoriesData();
+
   return {
     props: {
       pageData,
       allPagesData,
+      allCategoriesData,
     },
   };
 }
