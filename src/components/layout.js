@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { useState } from 'react';
 import styles from '../styles/layout.module.css';
 import utilStyles from '../styles/utils.module.css';
 
@@ -13,10 +12,6 @@ export default function Layout({
   allPagesData,
   allCategoriesData,
 }) {
-  const [showBgImage, setShowBgImage] = useState(
-    allCategoriesData.map(() => true)
-  );
-
   return (
     <div className={styles.container}>
       <Head>
@@ -45,7 +40,7 @@ export default function Layout({
             {allPagesData.map(({ slug, name }) => (
               <li className={utilStyles.listItem} key={slug}>
                 <Link href="/about/[slug]" as={`/about/${slug}`}>
-                  <a>{name}</a>
+                  <a>{name.toLowerCase()}</a>
                 </Link>
                 <br />
               </li>
@@ -59,27 +54,11 @@ export default function Layout({
             <Link href="/[name]" as={`/${name}`} key={id}>
               <a
                 style={{
-                  backgroundImage: `${
-                    showBgImage[i] ? `url(${thumbnail.url})` : 'none'
-                  }`,
+                  backgroundImage: `url(${thumbnail.url})`,
                   backgroundSize: 'cover',
                 }}
-                onMouseEnter={() =>
-                  setShowBgImage((show) => {
-                    const newShow = [...show];
-                    newShow[i] = false;
-                    return newShow;
-                  })
-                }
-                onMouseLeave={() =>
-                  setShowBgImage((show) => {
-                    const newShow = [...show];
-                    newShow[i] = true;
-                    return newShow;
-                  })
-                }
               >
-                {name}
+                <li>{name}</li>
               </a>
             </Link>
           ))}
