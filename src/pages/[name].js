@@ -17,6 +17,9 @@ export default function Category({
       <Head>{categoryData.name}</Head>
       <article>
         <h1>{categoryData.name}</h1>
+        {categoryData.pieces.map(({ id, title }) => (
+          <p key={id}>{title}</p>
+        ))}
       </article>
     </Layout>
   );
