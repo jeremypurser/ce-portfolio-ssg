@@ -57,8 +57,8 @@
 
 .categoryList a:hover,
 .categoryList a:link,
-.categoryList a:visited {
-  /* background-color: rgba(0, 128, 128, 0.75); */
+.categoryList a:visited,
+.active {
   background-image: none;
   text-align: center;
   line-height: 200px;
@@ -69,11 +69,13 @@
   height: 100%;
 }
 
-.categoryList li:hover {
+.categoryList li:hover,
+.active {
   background-color: rgba(0, 128, 128, 0.75);
 }
 
-.categoryList a:hover {
+.categoryList a:hover,
+.active {
   color: #fff;
   text-decoration: none;
 }
