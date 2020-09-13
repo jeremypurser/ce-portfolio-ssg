@@ -12,6 +12,7 @@ export default function Layout({
   home,
   allPagesData,
   allCategoriesData,
+  piece,
 }) {
   const [currentCategory, setCurrentCategory] = useState();
 
@@ -45,48 +46,53 @@ export default function Layout({
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <header className={styles.header}>
-        <h1>
-          <Link href="/">
-            <a>{siteTitle}</a>
-          </Link>
-        </h1>
-        <nav className={styles.aboutNav}>
-          <ul className={styles.aboutList}>
-            {allPagesData.map(({ slug, name }) => (
-              <li className={utilStyles.listItem} key={slug}>
-                <Link href="/about/[slug]" as={`/about/${slug}`}>
-                  <a>{name.toLowerCase()}</a>
+      {/* Show nav unless on a piece */}
+      {!piece ? (
+        <>
+          <header className={styles.header}>
+            <h1>
+              <Link href="/">
+                <a>{siteTitle}</a>
+              </Link>
+            </h1>
+            <nav className={styles.aboutNav}>
+              <ul className={styles.aboutList}>
+                {allPagesData.map(({ slug, name }) => (
+                  <li className={utilStyles.listItem} key={slug}>
+                    <Link href="/about/[slug]" as={`/about/${slug}`}>
+                      <a>{name.toLowerCase()}</a>
+                    </Link>
+                    <br />
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </header>
+          <nav className={styles.categoryNav}>
+            <ul className={styles.categoryList}>
+              {allCategoriesData.map(({ id, name, thumbnail }) => (
+                <Link href="/[name]" as={`/${name}`} key={id}>
+                  <a
+                    style={{
+                      backgroundImage: `url(${thumbnail.url})`,
+                      backgroundSize: 'cover',
+                    }}
+                  >
+                    <li
+                      className={`${
+                        currentCategory === name ? `${styles.active}` : null
+                      }`}
+                      onClick={() => setCurrentCategory(name)}
+                    >
+                      {name}
+                    </li>
+                  </a>
                 </Link>
-                <br />
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </header>
-      <nav className={styles.categoryNav}>
-        <ul className={styles.categoryList}>
-          {allCategoriesData.map(({ id, name, thumbnail }) => (
-            <Link href="/[name]" as={`/${name}`} key={id}>
-              <a
-                style={{
-                  backgroundImage: `url(${thumbnail.url})`,
-                  backgroundSize: 'cover',
-                }}
-              >
-                <li
-                  className={`${
-                    currentCategory === name ? `${styles.active}` : null
-                  }`}
-                  onClick={() => setCurrentCategory(name)}
-                >
-                  {name}
-                </li>
-              </a>
-            </Link>
-          ))}
-        </ul>
-      </nav>
+              ))}
+            </ul>
+          </nav>
+        </>
+      ) : null}
       <main>{children}</main>
       {!home && (
         <div className={styles.backToHome}>
