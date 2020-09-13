@@ -30,11 +30,11 @@ export default function Layout({
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <header className={styles.header}>
-        <h2>
+        <h1>
           <Link href="/">
             <a>{siteTitle}</a>
           </Link>
-        </h2>
+        </h1>
         <nav className={styles.aboutNav}>
           <ul className={styles.aboutList}>
             {allPagesData.map(({ slug, name }) => (
