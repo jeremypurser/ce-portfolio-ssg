@@ -6,7 +6,12 @@ import utilStyles from '../styles/utils.module.css';
 const name = 'Catherine Edgerton';
 export const siteTitle = name;
 
-export default function Layout({ children, home, allPagesData }) {
+export default function Layout({
+  children,
+  home,
+  allPagesData,
+  allCategoriesData,
+}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -30,17 +35,40 @@ export default function Layout({ children, home, allPagesData }) {
             <a>{siteTitle}</a>
           </Link>
         </h2>
-        <nav className={styles.nav}>
-          {allPagesData.map(({ slug, name }) => (
-            <li className={utilStyles.listItem} key={slug}>
-              <Link href="/about/[slug]" as={`/about/${slug}`}>
-                <a>{name}</a>
-              </Link>
-              <br />
-            </li>
-          ))}
+        <nav className={styles.aboutNav}>
+          <ul className={styles.aboutList}>
+            {allPagesData.map(({ slug, name }) => (
+              <li className={utilStyles.listItem} key={slug}>
+                <Link href="/about/[slug]" as={`/about/${slug}`}>
+                  <a>{name}</a>
+                </Link>
+                <br />
+              </li>
+            ))}
+          </ul>
         </nav>
       </header>
+      <nav className={styles.categoryNav}>
+        <ul className={styles.categoryList}>
+          {allCategoriesData.map(({ id, name, thumbnail }) => (
+            <li
+              className={utilStyles.listItem}
+              key={id}
+              style={{
+                backgroundImage: `url(${thumbnail.url})`,
+                backgroundSize: 'cover',
+              }}
+            >
+              <Link href="/[name]" as={`/${name}`}>
+                <a>
+                  {name}
+                  {/* <img src={thumbnail.url} /> */}
+                </a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
       <main>{children}</main>
       {!home && (
         <div className={styles.backToHome}>
