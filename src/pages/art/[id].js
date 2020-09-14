@@ -21,29 +21,37 @@ export default function Piece({ pieceData }) {
         <div className={styles.slides}>
           <img src={imageUrls[currentIndex]} />
         </div>
-        <a
-          className={styles.prev}
-          onClick={() => setCurrentIndex((currentIndex - 1) % imageUrls.length)}
-        >
-          ←
-        </a>
-        <a
-          className={styles.next}
-          onClick={() => setCurrentIndex((currentIndex + 1) % imageUrls.length)}
-        >
-          →
-        </a>
-        <div className={styles.dots}>
-          {imageUrls.map((_image, i) => (
-            <span
-              key={i}
-              className={cn(styles.dot, {
-                [styles.active]: i === currentIndex,
-              })}
-              onClick={() => setCurrentIndex(i)}
-            />
-          ))}
-        </div>
+        {imageUrls.length > 0 ? (
+          <>
+            <a
+              className={styles.prev}
+              onClick={() =>
+                setCurrentIndex((currentIndex - 1) % imageUrls.length)
+              }
+            >
+              ←
+            </a>
+            <a
+              className={styles.next}
+              onClick={() =>
+                setCurrentIndex((currentIndex + 1) % imageUrls.length)
+              }
+            >
+              →
+            </a>
+            <div className={styles.dots}>
+              {imageUrls.map((_image, i) => (
+                <span
+                  key={i}
+                  className={cn(styles.dot, {
+                    [styles.active]: i === currentIndex,
+                  })}
+                  onClick={() => setCurrentIndex(i)}
+                />
+              ))}
+            </div>
+          </>
+        ) : null}
       </article>
     </Layout>
   );
