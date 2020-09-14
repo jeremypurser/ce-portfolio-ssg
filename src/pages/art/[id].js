@@ -4,7 +4,7 @@ import { getPieceData, getPieceIds } from '../../lib/piece';
 
 export default function Piece({ pieceData }) {
   return (
-    <Layout piece={true}>
+    <Layout>
       <Head>
         <title>{pieceData.title}</title>
       </Head>
