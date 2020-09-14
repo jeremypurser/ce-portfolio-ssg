@@ -14,10 +14,13 @@ export default function Category({
   allCategoriesData,
 }) {
   return (
-    <Layout allPagesData={allPagesData} allCategoriesData={allCategoriesData}>
+    <Layout
+      page="art"
+      allPagesData={allPagesData}
+      allCategoriesData={allCategoriesData}
+    >
       <Head>{categoryData.name}</Head>
       <article>
-        <h1>{categoryData.name}</h1>
         {categoryData.pieces.map(({ id, title }) => (
           <Link key={id} href="/art/[id]" as={`/art/${id}`}>
             <a>{title}</a>

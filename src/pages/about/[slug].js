@@ -10,12 +10,16 @@ import utilStyles from '../../styles/utils.module.css';
 
 export default function Page({ pageData, allPagesData, allCategoriesData }) {
   return (
-    <Layout allPagesData={allPagesData} allCategoriesData={allCategoriesData}>
+    <Layout
+      page="about"
+      allPagesData={allPagesData}
+      allCategoriesData={allCategoriesData}
+    >
       <Head>
         <title>{pageData.name}</title>
       </Head>
       <article className={utilStyles.copy}>
-        <h1 className={utilStyles.headingXl}>{pageData.name}</h1>
+        <h2>{pageData.name}</h2>
         <div dangerouslySetInnerHTML={{ __html: pageData.description }} />
       </article>
     </Layout>
