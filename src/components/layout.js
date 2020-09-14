@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -82,9 +83,9 @@ export default function Layout({
                   }}
                 >
                   <li
-                    className={`${
-                      currentCategory === name ? `${styles.active}` : null
-                    }`}
+                    className={cn({
+                      [styles.active]: currentCategory === name,
+                    })}
                     onClick={() => setCurrentCategory(name)}
                   >
                     {name}
