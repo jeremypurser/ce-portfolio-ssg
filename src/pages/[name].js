@@ -7,6 +7,7 @@ import {
   getCategoryNames,
   getSortedCategoriesData,
 } from '../lib/category';
+import styles from '../styles/layout.module.css';
 
 export default function Category({
   categoryData,
@@ -21,11 +22,21 @@ export default function Category({
     >
       <Head>{categoryData.name}</Head>
       <article>
-        {categoryData.pieces.map(({ id, title }) => (
-          <Link key={id} href="/art/[id]" as={`/art/${id}`}>
-            <a>{title}</a>
-          </Link>
-        ))}
+        <ul className={styles.categoryList}>
+          {/* TODO: make thumbnail */}
+          {categoryData.pieces.map(({ id, title, thumbnail }) => (
+            <Link key={id} href="/art/[id]" as={`/art/${id}`}>
+              <a
+                style={{
+                  backgroundImage: `url(${thumbnail.formats.thumbnail.url})`,
+                  backgroundSize: 'cover',
+                }}
+              >
+                <li>{title}</li>
+              </a>
+            </Link>
+          ))}
+        </ul>
       </article>
     </Layout>
   );
