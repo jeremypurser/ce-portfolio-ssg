@@ -2,12 +2,13 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/layout';
 import { getSortedPagesData } from '../lib/about';
+import { capitalize } from '../lib/capitalize';
 import {
   getCategoryData,
   getCategoryNames,
   getSortedCategoriesData,
 } from '../lib/category';
-import styles from '../styles/layout.module.css';
+import styles from '../styles/category.module.css';
 
 export default function Category({
   categoryData,
@@ -21,15 +22,16 @@ export default function Category({
       allCategoriesData={allCategoriesData}
     >
       <Head>{categoryData.name}</Head>
-      <article>
-        <ul className={styles.categoryList}>
-          {/* TODO: make thumbnail */}
+      <h3>{capitalize(categoryData.name)}</h3>
+      <article className={styles.pieceNav}>
+        <ul className={styles.pieceList}>
           {categoryData.pieces.map(({ id, title, thumbnail }) => (
             <Link key={id} href="/art/[id]" as={`/art/${id}`}>
               <a
                 style={{
-                  backgroundImage: `url(${thumbnail.formats.thumbnail.url})`,
+                  backgroundImage: `url(${thumbnail.formats.small.url})`,
                   backgroundSize: 'cover',
+                  backgroundPosition: 'center',
                 }}
               >
                 <li>{title}</li>
