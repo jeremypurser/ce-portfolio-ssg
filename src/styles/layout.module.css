@@ -44,8 +44,6 @@
 
 .categoryList li {
   display: inline-block;
-  min-height: 200px;
-  line-height: 200px;
 }
 
 .categoryList a {
@@ -78,10 +76,4 @@
 .active {
   color: #fff;
   text-decoration: none;
-}
-
-.linkText {
-  position: relative;
-  top: 2rem;
-  left: 2rem;
 }
