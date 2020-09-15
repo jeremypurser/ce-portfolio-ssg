@@ -8,12 +8,12 @@ import utilStyles from '../styles/utils.module.css';
 const name = 'Catherine Edgerton';
 export const siteTitle = name;
 
+// TODO: remove home prop
 export default function Layout({
   children,
   home,
   allPagesData,
   allCategoriesData,
-  piece,
   page,
 }) {
   const [currentCategory, setCurrentCategory] = useState();
