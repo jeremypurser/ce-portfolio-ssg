@@ -22,6 +22,7 @@ export default function Category({
       allCategoriesData={allCategoriesData}
     >
       <Head>{categoryData.name}</Head>
+      <div className={styles.divider} />
       <h3>{capitalize(categoryData.name)}</h3>
       <article className={styles.pieceNav}>
         <ul className={styles.pieceList}>
