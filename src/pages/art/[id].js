@@ -19,7 +19,7 @@ export default function Piece({ pieceData }) {
         <h2>{pieceData.title}</h2>
         <p>{pieceData.description}</p>
         <div className={styles.slides}>
-          <img src={imageUrls[currentIndex]} />
+          <img className={styles.currentImage} src={imageUrls[currentIndex]} />
         </div>
         {imageUrls.length > 0 ? (
           <>

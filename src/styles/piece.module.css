@@ -1,5 +1,5 @@
 .slideshowContainer {
-  max-width: 900px;
+  max-width: 1000px;
   position: relative;
   margin: auto;
 }
@@ -7,6 +7,8 @@
 /* hide slides by default */
 .slides img {
   margin: auto;
+  min-height: 550px;
+  max-height: 550px;
 }
 
 /* buttons */
@@ -60,30 +62,4 @@
 .active,
 .dot:hover {
   background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1s;
-  animation-name: fade;
-  animation-duration: 1s;
-}
-
-@-webkit-keyframes fade {
-  from {
-    opacity: 0.4;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fade {
-  from {
-    opacity: 0.4;
-  }
-  to {
-    opacity: 1;
-  }
 }
