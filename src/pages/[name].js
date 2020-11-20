@@ -15,6 +15,13 @@ export default function Category({
   allPagesData,
   allCategoriesData,
 }) {
+  const getURL = (thumbnail) => {
+    if (thumbnail.formats.small) {
+      return thumbnail.formats.small.url;
+    }
+    return thumbnail.formats.thumbail.url;
+  };
+
   return (
     <Layout
       page="art"
@@ -30,7 +37,7 @@ export default function Category({
             <Link key={id} href="/art/[id]" as={`/art/${id}`}>
               <a
                 style={{
-                  backgroundImage: `url(${thumbnail.formats.small.url})`,
+                  backgroundImage: `url(${getURL(thumbnail)})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                 }}
