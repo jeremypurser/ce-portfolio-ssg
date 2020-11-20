@@ -6,9 +6,12 @@ import { getPieceData, getPieceIds } from '../../lib/piece';
 import styles from '../../styles/piece.module.css';
 
 export default function Piece({ pieceData }) {
-  const imageUrls = pieceData.images.map(
-    (image) => image.formats.medium?.url || image.formats.thumbnail.url
-  );
+  const imageUrls = pieceData.images.map((image) => {
+    if (image.formats.medium) {
+      return image.formats.medium.url;
+    }
+    return image.formats.thumbnail.url;
+  });
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
