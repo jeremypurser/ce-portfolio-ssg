@@ -19,7 +19,7 @@ export default function Category({
     if (thumbnail.formats.small) {
       return thumbnail.formats.small.url;
     }
-    return thumbnail.formats.thumbail.url;
+    return thumbnail.formats.thumbnail.url;
   };
 
   return (
