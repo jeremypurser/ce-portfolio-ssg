@@ -15,6 +15,19 @@ export default function Piece({ pieceData }) {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const handleLeftArrowClick = () => {
+    const imgsLen = imageUrls.length;
+    let nextIndex = (currentIndex - 1) % imgsLen;
+    if (nextIndex < 0) {
+      nextIndex = (nextIndex + imgsLen) % imgsLen;
+    }
+    setCurrentIndex(nextIndex);
+  };
+
+  const handleRightArrowClick = () => {
+    setCurrentIndex((currentIndex + 1) % imageUrls.length);
+  };
+
   return (
     <Layout>
       <Head>
@@ -28,20 +41,10 @@ export default function Piece({ pieceData }) {
         </div>
         {imageUrls.length > 0 ? (
           <>
-            <a
-              className={styles.prev}
-              onClick={() =>
-                setCurrentIndex((currentIndex - 1) % imageUrls.length)
-              }
-            >
+            <a className={styles.prev} onClick={handleLeftArrowClick}>
               ←
             </a>
-            <a
-              className={styles.next}
-              onClick={() =>
-                setCurrentIndex((currentIndex + 1) % imageUrls.length)
-              }
-            >
+            <a className={styles.next} onClick={handleRightArrowClick}>
               →
             </a>
             <div className={styles.dots}>
