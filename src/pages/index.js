@@ -22,8 +22,6 @@ export async function getStaticProps() {
 
   const allCategoriesData = await getSortedCategoriesData();
 
-  console.log({ allCategoriesData });
-
   return {
     props: {
       allPagesData,
