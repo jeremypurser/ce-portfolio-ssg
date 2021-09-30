@@ -32,5 +32,8 @@ export async function getCategoryData(name) {
 
   const [json] = await response.json();
 
-  return json;
+  return {
+    ...json,
+    pieces: json.pieces.sort((a, b) => a.order - b.order),
+  };
 }
