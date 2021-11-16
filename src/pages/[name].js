@@ -42,7 +42,7 @@ export default function Category({
                   backgroundPosition: 'center',
                 }}
               >
-                <li>{title}</li>
+                <li dangerouslySetInnerHTML={{ __html: title }} />
               </a>
             </Link>
           ))}
